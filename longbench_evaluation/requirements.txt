@@ -1,0 +1,8 @@
+torch>=2.0.0
+transformers>=4.37.0
+datasets>=2.16.0
+accelerate>=0.25.0
+flash-attn>=2.5.0
+tqdm
+numpy
+pandas

@@ -48,7 +48,6 @@ def load_model_and_tokenizer(model_name, device_map="auto", torch_dtype=torch.bf
         torch_dtype=torch_dtype,
         device_map=device_map,
         trust_remote_code=True,
-        attn_implementation="flash_attention_2" if torch.cuda.is_available() else None,
     )
     
     model.eval()
@@ -63,10 +62,9 @@ def generate_response(model, tokenizer, prompt, max_new_tokens=512):
         outputs = model.generate(
             **inputs,
             max_new_tokens=max_new_tokens,
-            temperature=0.0,
-            do_sample=False,
-            pad_token_id=tokenizer.pad_token_id,
-            eos_token_id=tokenizer.eos_token_id,
+        do_sample=False,  # temperature, top_p 제거
+        pad_token_id=tokenizer.pad_token_id,
+        eos_token_id=tokenizer.eos_token_id,
         )
     
     # Extract generated part only
